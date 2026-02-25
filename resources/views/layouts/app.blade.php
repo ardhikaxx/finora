@@ -240,9 +240,8 @@
         }
 
         .sidebar-menu-item.active {
-            background: linear-gradient(90deg, rgba(79, 70, 229, 0.3) 0%, rgba(79, 70, 229, 0.1) 100%);
+            background: rgba(14, 165, 233, 0.2);
             color: #fff;
-            border-left-color: var(--primary-color);
         }
 
         .sidebar-menu-item.active::before {
@@ -396,7 +395,7 @@
             color: #fff;
             font-weight: 600;
             font-size: 0.8rem;
-            box-shadow: 0 2px 4px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
         }
 
         .user-info {
@@ -538,7 +537,7 @@
         .btn-primary-custom:hover {
             background: var(--primary-hover);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
             color: #fff;
         }
 
@@ -669,7 +668,7 @@
 
         .form-control-custom:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
             outline: none;
         }
 
