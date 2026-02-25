@@ -174,7 +174,9 @@
                             <input type="password" class="form-control form-control-custom border-end-0 @error('password') is-invalid @endif" 
                                    id="password" name="password" required
                                    placeholder="••••••••">
-                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <button type="button" class="input-group-text" onclick="togglePassword('password', 'togglePasswordIcon')">
+                                <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                            </button>
                         </div>
                         @error('password')
                             <div class="text-danger small mt-2">{{ $message }}</div>
@@ -195,5 +197,21 @@
             </div>
         </div>
     </div>
+    <script>
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>
