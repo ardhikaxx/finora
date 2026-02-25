@@ -192,11 +192,6 @@
                         <i class="fas fa-sign-in-alt me-2"></i> Masuk
                     </button>
                 </form>
-
-                <div class="demo-info">
-                    <small>Demo Login:</small><br>
-                    <code>admin@finora.com</code> / <code>password</code>
-                </div>
             </div>
         </div>
     </div>
