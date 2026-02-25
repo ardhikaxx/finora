@@ -86,7 +86,7 @@
         .form-control-custom:focus {
             border-color: var(--primary-color);
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
             outline: none;
         }
         .btn-login {
@@ -100,9 +100,9 @@
             width: 100%;
         }
         .btn-login:hover {
-            background: #4338ca;
+            background: #0284c7;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
         }
         .input-group-text {
             background: #f1f5f9;
