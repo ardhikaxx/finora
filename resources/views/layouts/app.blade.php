@@ -98,6 +98,125 @@
         }
 
         .sidebar-menu {
+            padding: 0.75rem 0;
+        }
+
+        .sidebar-menu-item {
+            padding: 0.65rem 1.25rem;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .sidebar-menu-item:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+        }
+
+        .sidebar-menu-item.active {
+            background: rgba(14, 165, 233, 0.2);
+            color: #fff;
+        }
+
+        .sidebar-menu-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-menu-item .menu-arrow {
+            margin-left: auto;
+            font-size: 0.7rem;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar-menu-item[aria-expanded="true"] .menu-arrow,
+        .sidebar-menu-item[data-bs-toggle="collapse"].collapsed .menu-arrow {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-dropdown .sidebar-menu-item {
+            padding-left: 2.5rem;
+            font-size: 0.85rem;
+        }
+
+        .sidebar-dropdown .sidebar-menu-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .sidebar-dropdown .sidebar-menu-item.active {
+            background: rgba(14, 165, 233, 0.15);
+        }
+
+        .sidebar-section-title {
+            padding: 1rem 1.25rem 0.5rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.35);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .sidebar-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+
+        .sidebar-brand {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sidebar-brand .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.25rem;
+        }
+
+        .sidebar-brand h4 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+            color: #fff;
+            font-size: 1.25rem;
+        }
+
+        .sidebar-brand .brand-subtitle {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-menu {
             padding: 1rem 0;
         }
 
@@ -734,61 +853,118 @@
                 </a>
 
                 <div class="sidebar-section-title">Pengaturan</div>
-                <a href="{{ route('users.index') }}" class="sidebar-menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                    <i class="fas fa-users"></i> Pengguna
-                </a>
-                <a href="{{ route('roles.index') }}" class="sidebar-menu-item {{ request()->routeIs('roles.*') ? 'active' : '' }}">
-                    <i class="fas fa-user-shield"></i> Peran
-                </a>
-                <a href="{{ route('permissions.index') }}" class="sidebar-menu-item {{ request()->routeIs('permissions.*') ? 'active' : '' }}">
-                    <i class="fas fa-key"></i> Izin
-                </a>
-                <a href="{{ route('departments.index') }}" class="sidebar-menu-item {{ request()->routeIs('departments.*') ? 'active' : '' }}">
-                    <i class="fas fa-building"></i> Departemen
-                </a>
+                
+                <div class="sidebar-dropdown">
+                    <a class="sidebar-menu-item" data-bs-toggle="collapse" href="#pengaturanMenu" role="button" aria-expanded="false">
+                        <i class="fas fa-cog"></i> Pengaturan
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="pengaturanMenu">
+                        <a href="{{ route('users.index') }}" class="sidebar-menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                            <i class="fas fa-users"></i> Pengguna
+                        </a>
+                        <a href="{{ route('roles.index') }}" class="sidebar-menu-item {{ request()->routeIs('roles.*') ? 'active' : '' }}">
+                            <i class="fas fa-user-shield"></i> Peran
+                        </a>
+                        <a href="{{ route('permissions.index') }}" class="sidebar-menu-item {{ request()->routeIs('permissions.*') ? 'active' : '' }}">
+                            <i class="fas fa-key"></i> Izin
+                        </a>
+                        <a href="{{ route('departments.index') }}" class="sidebar-menu-item {{ request()->routeIs('departments.*') ? 'active' : '' }}">
+                            <i class="fas fa-building"></i> Departemen
+                        </a>
+                    </div>
+                </div>
 
-                <div class="sidebar-section-title">Payroll</div>
-                <a href="{{ route('employees.index') }}" class="sidebar-menu-item {{ request()->routeIs('employees.*') ? 'active' : '' }}">
-                    <i class="fas fa-user-tie"></i> Karyawan
-                </a>
-                <a href="{{ route('salary-structures.index') }}" class="sidebar-menu-item {{ request()->routeIs('salary-structures.*') ? 'active' : '' }}">
-                    <i class="fas fa-money-bill-wave"></i> Struktur Gaji
-                </a>
-                <a href="{{ route('attendances.index') }}" class="sidebar-menu-item {{ request()->routeIs('attendances.*') ? 'active' : '' }}">
-                    <i class="fas fa-clock"></i> Absensi
-                </a>
-                <a href="{{ route('leaves.index') }}" class="sidebar-menu-item {{ request()->routeIs('leaves.*') ? 'active' : '' }}">
-                    <i class="fas fa-calendar-minus"></i> Pengajuan Cuti
-                </a>
-                <a href="{{ route('leave-types.index') }}" class="sidebar-menu-item {{ request()->routeIs('leave-types.*') ? 'active' : '' }}">
-                    <i class="fas fa-calendar-alt"></i> Jenis Cuti
-                </a>
-                <a href="{{ route('payrolls.index') }}" class="sidebar-menu-item {{ request()->routeIs('payrolls.*') ? 'active' : '' }}">
-                    <i class="fas fa-file-invoice-dollar"></i> Payroll
-                </a>
+                <div class="sidebar-section-title">Payroll & HR</div>
+
+                <div class="sidebar-dropdown">
+                    <a class="sidebar-menu-item" data-bs-toggle="collapse" href="#hrMenu" role="button" aria-expanded="false">
+                        <i class="fas fa-users"></i> Karyawan
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="hrMenu">
+                        <a href="{{ route('employees.index') }}" class="sidebar-menu-item {{ request()->routeIs('employees.*') ? 'active' : '' }}">
+                            <i class="fas fa-user-tie"></i> Data Karyawan
+                        </a>
+                        <a href="{{ route('salary-structures.index') }}" class="sidebar-menu-item {{ request()->routeIs('salary-structures.*') ? 'active' : '' }}">
+                            <i class="fas fa-money-bill-wave"></i> Struktur Gaji
+                        </a>
+                        <a href="{{ route('attendances.index') }}" class="sidebar-menu-item {{ request()->routeIs('attendances.*') ? 'active' : '' }}">
+                            <i class="fas fa-clock"></i> Absensi
+                        </a>
+                        <a href="{{ route('leaves.index') }}" class="sidebar-menu-item {{ request()->routeIs('leaves.*') ? 'active' : '' }}">
+                            <i class="fas fa-calendar-minus"></i> Pengajuan Cuti
+                        </a>
+                        <a href="{{ route('leave-types.index') }}" class="sidebar-menu-item {{ request()->routeIs('leave-types.*') ? 'active' : '' }}">
+                            <i class="fas fa-calendar-alt"></i> Jenis Cuti
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-dropdown">
+                    <a class="sidebar-menu-item" data-bs-toggle="collapse" href="#payrollMenu" role="button" aria-expanded="false">
+                        <i class="fas fa-file-invoice-dollar"></i> Payroll
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="payrollMenu">
+                        <a href="{{ route('payrolls.index') }}" class="sidebar-menu-item {{ request()->routeIs('payrolls.*') ? 'active' : '' }}">
+                            <i class="fas fa-list"></i> Daftar Payroll
+                        </a>
+                        <a href="{{ route('payrolls.create') }}" class="sidebar-menu-item">
+                            <i class="fas fa-calculator"></i> Proses Payroll
+                        </a>
+                    </div>
+                </div>
 
                 <div class="sidebar-section-title">Keuangan</div>
-                <a href="{{ route('accounts.index') }}" class="sidebar-menu-item {{ request()->routeIs('accounts.*') ? 'active' : '' }}">
-                    <i class="fas fa-book"></i> Bagan Akun
-                </a>
-                <a href="{{ route('journal-entries.index') }}" class="sidebar-menu-item {{ request()->routeIs('journal-entries.*') ? 'active' : '' }}">
-                    <i class="fas fa-journal-whills"></i> Jurnal
-                </a>
-                <a href="{{ route('invoices.index') }}" class="sidebar-menu-item {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
-                    <i class="fas fa-file-invoice"></i> Faktur (AR)
-                </a>
-                <a href="{{ route('bills.index') }}" class="sidebar-menu-item {{ request()->routeIs('bills.*') ? 'active' : '' }}">
-                    <i class="fas fa-file-contract"></i> Tagihan (AP)
-                </a>
-                <a href="{{ route('customers.index') }}" class="sidebar-menu-item {{ request()->routeIs('customers.*') ? 'active' : '' }}">
-                    <i class="fas fa-user-friends"></i> Pelanggan
-                </a>
-                <a href="{{ route('vendors.index') }}" class="sidebar-menu-item {{ request()->routeIs('vendors.*') ? 'active' : '' }}">
-                    <i class="fas fa-truck"></i> Vendor
-                </a>
-                <a href="{{ route('budgets.index') }}" class="sidebar-menu-item {{ request()->routeIs('budgets.*') ? 'active' : '' }}">
-                    <i class="fas fa-chart-pie"></i> Anggaran
-                </a>
+
+                <div class="sidebar-dropdown">
+                    <a class="sidebar-menu-item" data-bs-toggle="collapse" href="#keuanganMenu" role="button" aria-expanded="false">
+                        <i class="fas fa-wallet"></i> Keuangan
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="keuanganMenu">
+                        <a href="{{ route('accounts.index') }}" class="sidebar-menu-item {{ request()->routeIs('accounts.*') ? 'active' : '' }}">
+                            <i class="fas fa-book"></i> Bagan Akun
+                        </a>
+                        <a href="{{ route('journal-entries.index') }}" class="sidebar-menu-item {{ request()->routeIs('journal-entries.*') ? 'active' : '' }}">
+                            <i class="fas fa-journal-whills"></i> Jurnal Umum
+                        </a>
+                        <a href="{{ route('budgets.index') }}" class="sidebar-menu-item {{ request()->routeIs('budgets.*') ? 'active' : '' }}">
+                            <i class="fas fa-chart-pie"></i> Anggaran
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-dropdown">
+                    <a class="sidebar-menu-item" data-bs-toggle="collapse" href="#piutangMenu" role="button" aria-expanded="false">
+                        <i class="fas fa-arrow-up"></i> Piutang (AR)
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="piutangMenu">
+                        <a href="{{ route('invoices.index') }}" class="sidebar-menu-item {{ request()->routeIs('invoices.*') ? 'active' : '' }}">
+                            <i class="fas fa-file-invoice"></i> Faktur
+                        </a>
+                        <a href="{{ route('customers.index') }}" class="sidebar-menu-item {{ request()->routeIs('customers.*') ? 'active' : '' }}">
+                            <i class="fas fa-user-friends"></i> Pelanggan
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-dropdown">
+                    <a class="sidebar-menu-item" data-bs-toggle="collapse" href="#hutangMenu" role="button" aria-expanded="false">
+                        <i class="fas fa-arrow-down"></i> Hutang (AP)
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="hutangMenu">
+                        <a href="{{ route('bills.index') }}" class="sidebar-menu-item {{ request()->routeIs('bills.*') ? 'active' : '' }}">
+                            <i class="fas fa-file-contract"></i> Tagihan
+                        </a>
+                        <a href="{{ route('vendors.index') }}" class="sidebar-menu-item {{ request()->routeIs('vendors.*') ? 'active' : '' }}">
+                            <i class="fas fa-truck"></i> Vendor
+                        </a>
+                    </div>
+                </div>
             </nav>
         </aside>
 
@@ -882,6 +1058,21 @@
                 });
             }
         }
+
+        // Auto-expand dropdown menu based on active route
+        document.addEventListener('DOMContentLoaded', function() {
+            const activeItem = document.querySelector('.sidebar-menu-item.active');
+            if (activeItem) {
+                const parentCollapse = activeItem.closest('.collapse');
+                if (parentCollapse) {
+                    parentCollapse.classList.add('show');
+                    const toggle = document.querySelector(`[href="#${parentCollapse.id}"]`);
+                    if (toggle) {
+                        toggle.setAttribute('aria-expanded', 'true');
+                    }
+                }
+            }
+        });
 
         // SweetAlert notifications
         @if(session('success'))
