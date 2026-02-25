@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-hover: #4338ca;
-            --primary-light: #c7d2fe;
+            --primary-color: #0ea5e9;
+            --primary-hover: #0284c7;
+            --primary-light: #bae6fd;
             --secondary-color: #64748b;
             --success-color: #10b981;
             --danger-color: #ef4444;
@@ -73,7 +73,7 @@
         .sidebar-brand .brand-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -394,7 +394,7 @@
             letter-spacing: 0.5px;
         }
 
-        .stat-card-primary { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+        .stat-card-primary { background: linear-gradient(135deg, #0ea5e9, #0891b2); }
         .stat-card-success { background: linear-gradient(135deg, #10b981, #059669); }
         .stat-card-info { background: linear-gradient(135deg, #06b6d4, #0891b2); }
         .stat-card-warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
@@ -518,7 +518,7 @@
             flex-shrink: 0;
         }
 
-        .avatar-primary { background: #e0e7ff; color: #4f46e5; }
+        .avatar-primary { background: #e0f2fe; color: #0ea5e9; }
         .avatar-success { background: #d1fae5; color: #059669; }
         .avatar-warning { background: #fef3c7; color: #d97706; }
         .avatar-danger { background: #fee2e2; color: #dc2626; }

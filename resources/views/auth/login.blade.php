@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-light: #818cf8;
+            --primary-color: #0ea5e9;
+            --primary-light: #38bdf8;
         }
         * { font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; }
         body {
