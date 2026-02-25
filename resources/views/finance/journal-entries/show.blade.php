@@ -1,25 +1,57 @@
 @extends('layouts.app')
-@section('title', 'Journal Entry Details - FINORA')
+@section('title', 'Detail Jurnal - FINORA')
 
 @section('content')
-<div class="card">
-    <div class="card-header bg-white"><h5 class="mb-0">Journal Entry</h5></div>
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+            <div class="avatar avatar-info">
+                <i class="fas fa-journal-whills"></i>
+            </div>
+            <span>Detail Jurnal</span>
+        </div>
+    </div>
     <div class="card-body">
-        <p><strong>Date:</strong> {{ $transaction->transaction_date->format('d M Y') }}</p>
-        <p><strong>Reference:</strong> {{ $transaction->reference_number ?? '-' }}</p>
-        <p><strong>Description:</strong> {{ $transaction->description }}</p>
-        <table class="table table-sm">
-            <thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
-            <tbody>
-                @foreach($transaction->journalEntries as $entry)
-                <tr>
-                    <td>{{ $entry->account->account_name }}</td>
-                    <td>{{ $entry->debit > 0 ? '$'.number_format($entry->debit, 2) : '-' }}</td>
-                    <td>{{ $entry->credit > 0 ? '$'.number_format($entry->credit, 2) : '-' }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="text-muted" style="font-size: 0.8rem;">Tanggal</label>
+                    <div class="fw-medium">{{ $transaction->transaction_date->format('d M Y') }}</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="text-muted" style="font-size: 0.8rem;">Referensi</label>
+                    <div class="fw-medium">{{ $transaction->reference_number ?? '-' }}</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="text-muted" style="font-size: 0.8rem;">Deskripsi</label>
+                    <div class="fw-medium">{{ $transaction->description }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-custom mb-0">
+                <thead>
+                    <tr>
+                        <th>Akun</th>
+                        <th class="text-end">Debit</th>
+                        <th class="text-end">Kredit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($transaction->journalEntries as $entry)
+                    <tr>
+                        <td>{{ $entry->account->account_name }}</td>
+                        <td class="text-end">{{ $entry->debit > 0 ? @rupiah($entry->debit) : '-' }}</td>
+                        <td class="text-end">{{ $entry->credit > 0 ? @rupiah($entry->credit) : '-' }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection
