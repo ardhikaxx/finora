@@ -101,12 +101,26 @@ php artisan serve
 
 ---
 
+## 👥 Peran (Roles)
+
+Sistem FINORA memiliki 4 peran (roles) dengan tingkat akses yang berbeda:
+
+| Peran | Deskripsi |
+|-------|-----------|
+| **Super Admin** | Akses penuh ke seluruh sistem |
+| **Admin** | Akses administratif penuh kecuali konfigurasi super admin |
+| **Manager** | Mengelola departemen dan menyetujui laporan |
+| **Staff** | Karyawan dengan akses terbatas |
+
+---
+
 ## 👤 Akun Default
 
 Setelah instalasi, gunakan akun berikut untuk login:
 
 - **Email**: admin@finora.com
 - **Password**: password
+- **Role**: Super Admin
 
 ---
 
