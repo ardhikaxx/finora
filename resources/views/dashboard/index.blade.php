@@ -12,6 +12,9 @@
             </div>
             <div class="stat-label">Total Karyawan</div>
             <div class="stat-value">{{ $stats['total_employees'] }}</div>
+            <div class="stat-trend">
+                <i class="fas fa-arrow-up"></i> {{ $stats['active_employees'] }} aktif
+            </div>
         </div>
     </div>
     <div class="col-6 col-lg-3">
@@ -21,6 +24,9 @@
             </div>
             <div class="stat-label">Karyawan Aktif</div>
             <div class="stat-value">{{ $stats['active_employees'] }}</div>
+            <div class="stat-trend">
+                <i class="fas fa-chart-line"></i> Sekarang
+            </div>
         </div>
     </div>
     <div class="col-6 col-lg-3">
@@ -30,6 +36,9 @@
             </div>
             <div class="stat-label">Departemen</div>
             <div class="stat-value">{{ $stats['total_departments'] }}</div>
+            <div class="stat-trend">
+                <i class="fas fa-sitemap"></i> Unit Kerja
+            </div>
         </div>
     </div>
     <div class="col-6 col-lg-3">
@@ -39,6 +48,9 @@
             </div>
             <div class="stat-label">Cuti Tertunda</div>
             <div class="stat-value">{{ $stats['pending_leave_applications'] }}</div>
+            <div class="stat-trend">
+                <i class="fas fa-exclamation-circle"></i> PerluApproval
+            </div>
         </div>
     </div>
 </div>
@@ -46,7 +58,7 @@
 <!-- Financial Summary & Recent Payroll -->
 <div class="row g-4 mb-4">
     <div class="col-lg-6">
-        <div class="card card-custom">
+        <div class="card card-custom animate-fade-in animate-delay-2">
             <div class="card-header">
                 <div class="d-flex align-items-center gap-2">
                     <div class="avatar avatar-primary">
@@ -54,7 +66,9 @@
                     </div>
                     <span>Ringkasan Keuangan</span>
                 </div>
-                <span class="badge badge-custom badge-processed">Bulan Ini</span>
+                <span class="badge badge-custom badge-processed">
+                    <i class="fas fa-calendar-alt me-1"></i>Bulan Ini
+                </span>
             </div>
             <div class="card-body p-0">
                 <div class="p-3">
@@ -64,10 +78,11 @@
                                 <i class="fas fa-arrow-up"></i>
                             </div>
                             <div>
-                                <div class="text-muted" style="font-size: 0.8rem;">Total Pendapatan</div>
-                                <div class="fw-bold text-success">@rupiah($financialStats['total_revenue'])</div>
+                                <div class="text-muted" style="font-size: 0.75rem;">Total Pendapatan</div>
+                                <div class="fw-bold text-success" style="font-size: 1.1rem;">@rupiah($financialStats['total_revenue'])</div>
                             </div>
                         </div>
+                        <i class="fas fa-chevron-right text-muted" style="font-size: 0.75rem;"></i>
                     </div>
                     <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
                         <div class="d-flex align-items-center gap-3">
@@ -75,10 +90,11 @@
                                 <i class="fas fa-arrow-down"></i>
                             </div>
                             <div>
-                                <div class="text-muted" style="font-size: 0.8rem;">Total Pengeluaran</div>
-                                <div class="fw-bold text-danger">@rupiah($financialStats['total_expenses'])</div>
+                                <div class="text-muted" style="font-size: 0.75rem;">Total Pengeluaran</div>
+                                <div class="fw-bold text-danger" style="font-size: 1.1rem;">@rupiah($financialStats['total_expenses'])</div>
                             </div>
                         </div>
+                        <i class="fas fa-chevron-right text-muted" style="font-size: 0.75rem;"></i>
                     </div>
                     <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
                         <div class="d-flex align-items-center gap-3">
@@ -86,10 +102,11 @@
                                 <i class="fas fa-money-bill-wave"></i>
                             </div>
                             <div>
-                                <div class="text-muted" style="font-size: 0.8rem;">Piutang</div>
-                                <div class="fw-bold text-warning">@rupiah($financialStats['accounts_receivable'])</div>
+                                <div class="text-muted" style="font-size: 0.75rem;">Piutang</div>
+                                <div class="fw-bold text-warning" style="font-size: 1.1rem;">@rupiah($financialStats['accounts_receivable'])</div>
                             </div>
                         </div>
+                        <i class="fas fa-chevron-right text-muted" style="font-size: 0.75rem;"></i>
                     </div>
                     <div class="d-flex justify-content-between align-items-center py-3">
                         <div class="d-flex align-items-center gap-3">
@@ -97,10 +114,11 @@
                                 <i class="fas fa-credit-card"></i>
                             </div>
                             <div>
-                                <div class="text-muted" style="font-size: 0.8rem;">Hutang</div>
-                                <div class="fw-bold text-info">@rupiah($financialStats['accounts_payable'])</div>
+                                <div class="text-muted" style="font-size: 0.75rem;">Hutang</div>
+                                <div class="fw-bold text-info" style="font-size: 1.1rem;">@rupiah($financialStats['accounts_payable'])</div>
                             </div>
                         </div>
+                        <i class="fas fa-chevron-right text-muted" style="font-size: 0.75rem;"></i>
                     </div>
                 </div>
             </div>
@@ -108,16 +126,16 @@
     </div>
 
     <div class="col-lg-6">
-        <div class="card card-custom">
+        <div class="card card-custom animate-fade-in animate-delay-3">
             <div class="card-header">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="avatar avatar-primary">
+                    <div class="avatar avatar-success">
                         <i class="fas fa-history"></i>
                     </div>
                     <span>Payroll Terbaru</span>
                 </div>
                 <a href="{{ route('payrolls.index') }}" class="btn btn-primary-custom btn-sm">
-                    Lihat Semua
+                    <i class="fas fa-eye"></i> Lihat Semua
                 </a>
             </div>
             <div class="card-body p-0">
@@ -134,21 +152,21 @@
                             @forelse($recentPayrolls as $payroll)
                             <tr>
                                 <td>
-                                    <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex align-items-center gap-3">
                                         <div class="avatar avatar-primary">
                                             {{ strtoupper(substr($payroll->employee->first_name, 0, 2)) }}
                                         </div>
                                         <div>
-                                            <div class="fw-medium">{{ $payroll->employee->full_name }}</div>
+                                            <div class="fw-semibold">{{ $payroll->employee->full_name }}</div>
                                             <div class="text-muted" style="font-size: 0.7rem;">{{ $payroll->employee->department->name ?? '-' }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-end fw-bold">@rupiah($payroll->net_salary)</td>
+                                <td class="text-end fw-bold" style="font-size: 0.95rem;">@rupiah($payroll->net_salary)</td>
                                 <td>
                                     @if($payroll->status === 'processed')
                                     <span class="badge badge-custom badge-processed">
-                                        <i class="fas fa-check"></i> Diproses
+                                        <i class="fas fa-check-circle"></i> Diproses
                                     </span>
                                     @else
                                     <span class="badge badge-custom badge-pending">
