@@ -3,33 +3,44 @@
 @section('page-title', 'Bagan Akun')
 
 @section('content')
-<div class="card card-custom">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <span><i class="fas fa-book me-2 text-primary"></i>Daftar Akun</span>
-        <a href="{{ route('accounts.create') }}" class="btn btn-primary-custom">
-            <i class="fas fa-plus me-1"></i> Tambah Akun
-        </a>
-    </div>
-    <div class="card-body">
-        <form method="GET" class="mb-4">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <select class="form-control form-control-custom" name="account_type">
-                        <option value="">Semua Jenis</option>
-                        <option value="asset">Aktiva</option>
-                        <option value="liability">Kewajiban</option>
-                        <option value="equity">Ekuitas</option>
-                        <option value="revenue">Pendapatan</option>
-                        <option value="expense">Beban</option>
-                    </select>
+<div class="row mb-4">
+    <div class="col-md-8">
+        <form method="GET">
+            <div class="d-flex gap-2">
+                <div class="search-box flex-grow-1">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="form-control form-control-custom" name="search" placeholder="Cari akun..." value="{{ request('search') }}">
                 </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary-custom w-100">
-                        <i class="fas fa-filter me-1"></i> Filter
-                    </button>
-                </div>
+                <select class="form-select form-select-custom" name="account_type" style="width: 180px;">
+                    <option value="">Semua Jenis</option>
+                    <option value="asset" {{ request('account_type') === 'asset' ? 'selected' : '' }}>Aktiva</option>
+                    <option value="liability" {{ request('account_type') === 'liability' ? 'selected' : '' }}>Kewajiban</option>
+                    <option value="equity" {{ request('account_type') === 'equity' ? 'selected' : '' }}>Ekuitas</option>
+                    <option value="revenue" {{ request('account_type') === 'revenue' ? 'selected' : '' }}>Pendapatan</option>
+                    <option value="expense" {{ request('account_type') === 'expense' ? 'selected' : '' }}>Beban</option>
+                </select>
+                <button type="submit" class="btn btn-primary-custom">
+                    <i class="fas fa-filter"></i> Filter
+                </button>
             </div>
         </form>
+    </div>
+    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <a href="{{ route('accounts.create') }}" class="btn btn-primary-custom">
+            <i class="fas fa-plus-circle"></i> Tambah Akun
+        </a>
+    </div>
+</div>
+
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="d-flex align-items-center gap-2">
+            <div class="avatar avatar-primary">
+                <i class="fas fa-book"></i>
+            </div>
+            <span>Daftar Akun</span>
+        </div>
+        <span class="badge badge-custom badge-processed">{{ $accounts->count() }} Akun</span>
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
@@ -40,19 +51,24 @@
                         <th>Nama Akun</th>
                         <th>Jenis</th>
                         <th>Akun Induk</th>
-                        <th width="120">Aksi</th>
+                        <th class="text-end">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($accounts as $account)
-                    <tr>
-                        <td class="fw-medium">{{ $account->account_number }}</td>
+                    <tr class="animate-fade-in" style="animation-delay: {{ $loop->index * 0.03 }}s;">
+                        <td class="fw-bold" style="font-family: 'Courier New', monospace;">{{ $account->account_number }}</td>
                         <td>
-                            <div class="d-flex align-items-center">
-                                <div class="bg-light rounded p-2 me-3" style="width: 40px; height: 40px;">
-                                    <i class="fas fa-{{ $account->account_type === 'asset' ? 'box' : ($account->account_type === 'liability' ? 'credit-card' : ($account->account_type === 'revenue' ? 'arrow-up' : ($account->account_type === 'expense' ? 'arrow-down' : 'pie-chart'))) }} text-secondary"></i>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="avatar 
+                                    @if($account->account_type === 'asset') avatar-success
+                                    @elseif($account->account_type === 'liability') avatar-danger
+                                    @elseif($account->account_type === 'equity') avatar-info
+                                    @elseif($account->account_type === 'revenue') avatar-warning
+                                    @else avatar-primary @endif">
+                                    <i class="fas fa-{{ $account->account_type === 'asset' ? 'box' : ($account->account_type === 'liability' ? 'credit-card' : ($account->account_type === 'revenue' ? 'arrow-up' : ($account->account_type === 'expense' ? 'arrow-down' : 'pie-chart'))) }}"></i>
                                 </div>
-                                {{ $account->account_name }}
+                                <span class="fw-semibold">{{ $account->account_name }}</span>
                             </div>
                         </td>
                         <td>
@@ -61,31 +77,41 @@
                             @elseif($account->account_type === 'liability')
                             <span class="badge badge-custom badge-overdue">Kewajiban</span>
                             @elseif($account->account_type === 'equity')
-                            <span class="badge badge-custom badge-info">Ekuitas</span>
+                            <span class="badge badge-custom badge-processed">Ekuitas</span>
                             @elseif($account->account_type === 'revenue')
                             <span class="badge badge-custom badge-paid">Pendapatan</span>
                             @else
                             <span class="badge badge-custom badge-pending">Beban</span>
                             @endif
                         </td>
-                        <td>{{ $account->parentAccount->account_name ?? '-' }}</td>
+                        <td class="text-muted">{{ $account->parentAccount->account_name ?? '-' }}</td>
                         <td>
-                            <a href="{{ route('accounts.show', $account->id) }}" class="btn btn-icon btn-info" title="Lihat"><i class="fas fa-eye"></i></a>
-                            <a href="{{ route('accounts.edit', $account->id) }}" class="btn btn-icon btn-warning" title="Edit"><i class="fas fa-edit"></i></a>
-                            <form action="{{ route('accounts.destroy', $account->id) }}" method="POST" class="d-inline">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-icon btn-danger" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
+                            <div class="d-flex gap-1 justify-content-end">
+                                <a href="{{ route('accounts.show', $account->id) }}" class="btn btn-icon btn-info" title="Lihat Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ route('accounts.edit', $account->id) }}" class="btn btn-icon btn-warning" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('accounts.destroy', $account->id) }}" method="POST" class="d-inline">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn btn-icon btn-danger" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center py-4">
+                        <td colspan="5">
                             <div class="empty-state">
-                                <i class="fas fa-book d-block mb-2"></i>
-                                <p class="mb-0">Tidak ada akun</p>
+                                <i class="fas fa-book-open mb-3" style="font-size: 3.5rem;"></i>
+                                <h5 class="fw-semibold">Belum Ada Akun</h5>
+                                <p class="text-muted mb-3">Silakan tambah akun terlebih dahulu</p>
+                                <a href="{{ route('accounts.create') }}" class="btn btn-primary-custom">
+                                    <i class="fas fa-plus"></i> Tambah Akun
+                                </a>
                             </div>
                         </td>
                     </tr>
