@@ -6,33 +6,63 @@
     <title>Login - FINORA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #0ea5e9;
             --primary-light: #38bdf8;
+            --primary-dark: #0284c7;
         }
         * { font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            right: -20%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 60%);
+            pointer-events: none;
         }
         .login-wrapper {
             width: 100%;
             max-width: 440px;
+            position: relative;
+            z-index: 1;
         }
         .login-card {
             background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
             overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .login-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             padding: 2.5rem 2rem;
             text-align: center;
             position: relative;
@@ -42,101 +72,121 @@
             content: '';
             position: absolute;
             top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            right: -30%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-10%); }
+            50% { transform: translateX(10%); }
         }
         .login-header .brand {
             position: relative;
             z-index: 1;
         }
         .login-header .brand-icon {
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             background: rgba(255,255,255,0.2);
-            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         .login-header h1 {
             color: #fff;
-            font-weight: 700;
+            font-weight: 800;
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.25rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .login-header p {
-            color: rgba(255,255,255,0.85);
-            margin: 0.5rem 0 0;
+            color: rgba(255,255,255,0.9);
+            margin: 0.75rem 0 0;
             font-size: 0.9rem;
+            font-weight: 500;
         }
         .login-body {
-            padding: 2rem;
+            padding: 2.25rem;
         }
         .form-control-custom {
             border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 0.875rem 1rem;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
+            border-radius: 14px;
+            padding: 0.9rem 1.1rem;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
             background: #f8fafc;
         }
         .form-control-custom:focus {
             border-color: var(--primary-color);
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
             outline: none;
+            transform: translateY(-1px);
+        }
+        .form-control-custom::placeholder {
+            color: #94a3b8;
         }
         .btn-login {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             border: none;
-            padding: 0.875rem;
-            border-radius: 12px;
-            font-weight: 600;
+            padding: 1rem;
+            border-radius: 14px;
+            font-weight: 700;
             font-size: 1rem;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             width: 100%;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
         }
         .btn-login:hover {
-            background: #0284c7;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.45);
+        }
+        .btn-login:active {
+            transform: translateY(-1px);
         }
         .input-group-text {
             background: #f1f5f9;
             border: 2px solid #e2e8f0;
             border-left: none;
-            border-radius: 0 12px 12px 0;
+            border-radius: 0 14px 14px 0;
+            transition: all 0.2s ease;
         }
         .input-group-text i {
-            color: #94a3b8;
+            color: #64748b;
+            width: 20px;
+            text-align: center;
         }
         .form-control-custom.border-end-0 {
             border-right: none;
-            border-radius: 12px 0 0 12px;
+            border-radius: 14px 0 0 14px;
+        }
+        .input-group:focus-within .input-group-text {
+            border-color: var(--primary-color);
+            background: #fff;
+        }
+        .input-group:focus-within .input-group-text i {
+            color: var(--primary-color);
         }
         .form-check-input:checked {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
         }
-        .demo-info {
-            background: #f1f5f9;
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            margin-top: 1.5rem;
+        .form-check-input:focus {
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
         }
-        .demo-info small {
-            color: #64748b;
-        }
-        .demo-info code {
-            background: #e2e8f0;
-            padding: 0.2rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            color: var(--primary-color);
+        .form-label {
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -146,7 +196,7 @@
             <div class="login-header">
                 <div class="brand">
                     <div class="brand-icon">
-                        <i class="fas fa-chart-line text-white" style="font-size: 1.75rem;"></i>
+                        <i class="fas fa-chart-line text-white" style="font-size: 2rem;"></i>
                     </div>
                     <h1>FINORA</h1>
                     <p>Sistem Reporting Keuangan & Operasional</p>
@@ -155,12 +205,12 @@
             <div class="login-body">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
-                    <div class="mb-3">
-                        <label for="email" class="form-label fw-medium mb-2">Alamat Email</label>
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Alamat Email</label>
                         <div class="input-group">
                             <input type="email" class="form-control form-control-custom border-end-0 @error('email') is-invalid @enderror" 
                                    id="email" name="email" value="{{ old('email') }}" required autofocus
-                                   placeholder="name@company.com">
+                                   placeholder="nama@perusahaan.com">
                             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                         </div>
                         @error('email')
@@ -168,8 +218,8 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label fw-medium mb-2">Kata Sandi</label>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Kata Sandi</label>
                         <div class="input-group">
                             <input type="password" class="form-control form-control-custom border-end-0 @error('password') is-invalid @endif" 
                                    id="password" name="password" required
@@ -191,7 +241,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-login text-white">
-                        <i class="fas fa-sign-in-alt me-2"></i> Masuk
+                        <i class="fas fa-sign-in-alt me-2"></i> Masuk ke Sistem
                     </button>
                 </form>
             </div>
