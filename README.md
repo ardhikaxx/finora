@@ -149,3 +149,21 @@ Dikembangkan dengan Laravel 12
 ## 📞 Support
 
 Untuk pertanyaan atau issue, please create issue di GitHub repository.
+
+
+## Donasi
+
+Jika project ini bermanfaat, Anda dapat mendukung pengembangan selanjutnya melalui donasi:
+
+<div align="center">
+
+![QRIS](public/assets/qris.png)
+
+**Scan QRIS di atas untuk berdonasi**
+
+Setiap donasi akan digunakan untuk:
+- Pengembangan fitur baru
+- Perbaikan bug & maintenance
+- Infrastruktur server
+
+</div>
