@@ -1,4 +1,4 @@
-# FINORA - Financial & Operational Reporting Application
+﻿# FINORA - Financial & Operational Reporting Application
 
 Sistem Informasi Manajemen Keuangan dan Operasional berbasis web yang dirancang untuk mengelola berbagai aspek keuangan dan SDM dalam sebuah organisasi.
 
@@ -157,7 +157,7 @@ Jika project ini bermanfaat, Anda dapat mendukung pengembangan selanjutnya melal
 
 <div align="center">
 
-![QRIS](public/assets/qris.png)
+<img src="public/assets/qris.png" alt="QRIS" width="250" />
 
 **Scan QRIS di atas untuk berdonasi**
 
